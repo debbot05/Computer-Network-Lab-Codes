@@ -27,18 +27,18 @@ int main() {
     servaddr.sin_port = htons(8080);
     bind(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr));
     listen(sockfd, 5);
-    printf("🚀 Waiting for connection...\n");
+    printf("Waiting for connection...\n");
     socklen_t len = sizeof(cli);
     connfd = accept(sockfd, (struct sockaddr*)&cli, &len);
-    printf("✅ Connected to client.\n");
+    printf("Connected to client.\n");
 
-    printf("🔢 Enter the dataword (binary): ");
+    printf("Enter the dataword (binary): ");
     scanf("%s", data);
     dl = strlen(data);
 
     while (pow(2, i) < dl + i + 1) i++;
     r = i;
-    printf("🧮 No of redundant bits: %d\n", r);
+    printf("No of redundant bits: %d\n", r);
 
     for (i = 0; i < dl; i++)
         data1[i] = data[i] - '0';
@@ -76,30 +76,30 @@ int main() {
     }
 
     reverse(codeword);  // make bit 1 the leftmost
-    printf("✅ Generated codeword: %s\n", codeword);
+    printf("Generated codeword: %s\n", codeword);
 
     char choice;
-    printf("⚙️ Do you want to inject an error? (y/n): ");
+    printf("Do you want to inject an error? (y/n): ");
     scanf(" %c", &choice);
 
     if (choice == 'y' || choice == 'Y') {
         int pos;
         int len_code = strlen(codeword);
-        printf("📍 Enter bit position to flip (1 to %d): ", len_code);
+        printf("Enter bit position to flip (1 to %d): ", len_code);
         scanf("%d", &pos);
         if (pos >= 1 && pos <= len_code) {
             pos--; // 0-indexed
             codeword[pos] = (codeword[pos] == '0') ? '1' : '0';
-            printf("💥 Codeword with error at position %d: %s\n", pos + 1, codeword);
+            printf("Codeword with error at position %d: %s\n", pos + 1, codeword);
         } else {
-            printf("⚠️ Invalid position. Sending original codeword.\n");
+            printf("Invalid position. Sending original codeword.\n");
         }
     } else {
-        printf("📨 Codeword sent without error: %s\n", codeword);
+        printf("Codeword sent without error: %s\n", codeword);
     }
 
     send(connfd, codeword, sizeof(codeword), 0);
-    printf("📤 Codeword sent to client.\n");
+    printf("Codeword sent to client.\n");
 
     close(sockfd);
     return 0;
