@@ -131,15 +131,6 @@ gcc parity_client.c -o parity_client
 
 ---
 
-## 👤 Author
-
-**Aniket Ganguli**  
-Dept. of CSE  
-[Academy of Technology]  
-Email: [aniketganguli6@gmail.com]
-
----
-
 ## 📜 License
 
 This project is free to use for academic and learning purposes.
